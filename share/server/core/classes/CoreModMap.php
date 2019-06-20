@@ -40,6 +40,7 @@ class CoreModMap extends CoreModule {
             'getObjectStates'   => 'view',
 
             'manage'            => REQUIRES_AUTHORISATION,
+			'listMap'           => REQUIRES_AUTHORISATION,
             'doExportMap'       => 'edit',
             'addModify'         => 'edit',
             'modifyObject'      => 'edit',
@@ -110,6 +111,9 @@ class CoreModMap extends CoreModule {
                 case 'manage':
                     $VIEW = new ViewManageMaps();
                     $sReturn = json_encode(Array('code' => $VIEW->parse()));
+                break;
+                case 'listMap':
+                    $sReturn = json_encode($this->CORE->getAvailableMaps());
                 break;
                 case 'modifyObject':
                     $sReturn = $this->handleResponse('handleResponseModifyObject', 'doModifyObject',
